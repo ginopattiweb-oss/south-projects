@@ -45,6 +45,7 @@ export default function DashboardPage() {
   const [calendarError, setCalendarError] = useState<string | null>(null);
 
   const load = useCallback(async () => {
+    try {
     const [clientRes, projRes, taskRes, invRes, expRes, subRes] = await Promise.all([
       fetch("/api/clients"), fetch("/api/projects"), fetch("/api/tasks"),
       fetch("/api/invoices"), fetch("/api/expenses"), fetch("/api/subscriptions"),
@@ -54,6 +55,11 @@ export default function DashboardPage() {
       clientRes.json(), projRes.json(), taskRes.json(),
       invRes.json(), expRes.json(), subRes.json(),
     ]);
+
+    if (!Array.isArray(clientData) || !Array.isArray(projData) || !Array.isArray(taskData) || !Array.isArray(invData) || !Array.isArray(expData) || !Array.isArray(subData)) {
+      setLoading(false);
+      return;
+    }
 
     setClients(clientData);
 
@@ -121,7 +127,11 @@ export default function DashboardPage() {
     ].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()).slice(0, 8);
 
     setRecent(recentItems);
-    setLoading(false);
+    } catch {
+      // API unavailable or session missing — stop spinner
+    } finally {
+      setLoading(false);
+    }
   }, []);
 
   useEffect(() => { load(); }, [load]);

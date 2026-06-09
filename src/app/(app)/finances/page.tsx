@@ -94,16 +94,24 @@ export default function FinancesPage() {
   });
 
   const load = useCallback(async () => {
-    const [invRes, expRes, subRes, projRes, clientRes] = await Promise.all([
-      fetch("/api/invoices"), fetch("/api/expenses"), fetch("/api/subscriptions"),
-      fetch("/api/projects"), fetch("/api/clients"),
-    ]);
-    setInvoices(await invRes.json());
-    setExpenses(await expRes.json());
-    setSubscriptions(await subRes.json());
-    setProjects(await projRes.json());
-    setClients(await clientRes.json());
-    setLoading(false);
+    try {
+      const [invRes, expRes, subRes, projRes, clientRes] = await Promise.all([
+        fetch("/api/invoices"), fetch("/api/expenses"), fetch("/api/subscriptions"),
+        fetch("/api/projects"), fetch("/api/clients"),
+      ]);
+      const [invData, expData, subData, projData, clientData] = await Promise.all([
+        invRes.json(), expRes.json(), subRes.json(), projRes.json(), clientRes.json(),
+      ]);
+      if (Array.isArray(invData))    setInvoices(invData);
+      if (Array.isArray(expData))    setExpenses(expData);
+      if (Array.isArray(subData))    setSubscriptions(subData);
+      if (Array.isArray(projData))   setProjects(projData);
+      if (Array.isArray(clientData)) setClients(clientData);
+    } catch {
+      // session missing or API error
+    } finally {
+      setLoading(false);
+    }
   }, []);
 
   useEffect(() => { load(); }, [load]);
