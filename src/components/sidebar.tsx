@@ -20,36 +20,39 @@ import {
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
-const NAV = [
-  { href: "/dashboard",     label: "Panel",         icon: LayoutDashboard },
-  { href: "/clients",       label: "Clientes",      icon: Users },
-  { href: "/projects",      label: "Proyectos",     icon: FolderKanban },
-  { href: "/tasks",         label: "Tareas",        icon: CheckSquare },
-  { href: "/finances",      label: "Finanzas",      icon: BarChart2 },
-  { href: "/invoices",      label: "Facturas",      icon: FileText },
-  { href: "/quotes",        label: "Cotizaciones",  icon: FileSignature },
-  { href: "/subscriptions", label: "Suscripciones", icon: RefreshCw },
-  { href: "/expenses",      label: "Gastos",        icon: Receipt },
-  { href: "/vault",         label: "Bóveda",        icon: KeyRound },
-  { href: "/wiki",          label: "Wiki",          icon: BookOpen },
-  { href: "/settings",      label: "Ajustes",       icon: Settings },
+const ALL_NAV = [
+  { href: "/dashboard",     label: "Panel",         icon: LayoutDashboard, ownerOnly: false },
+  { href: "/clients",       label: "Clientes",      icon: Users,           ownerOnly: false },
+  { href: "/projects",      label: "Proyectos",     icon: FolderKanban,    ownerOnly: false },
+  { href: "/tasks",         label: "Tareas",        icon: CheckSquare,     ownerOnly: false },
+  { href: "/finances",      label: "Finanzas",      icon: BarChart2,       ownerOnly: true  },
+  { href: "/invoices",      label: "Facturas",      icon: FileText,        ownerOnly: true  },
+  { href: "/quotes",        label: "Cotizaciones",  icon: FileSignature,   ownerOnly: true  },
+  { href: "/subscriptions", label: "Suscripciones", icon: RefreshCw,       ownerOnly: true  },
+  { href: "/expenses",      label: "Gastos",        icon: Receipt,         ownerOnly: true  },
+  { href: "/vault",         label: "Bóveda",        icon: KeyRound,        ownerOnly: true  },
+  { href: "/wiki",          label: "Wiki",          icon: BookOpen,        ownerOnly: false },
+  { href: "/settings",      label: "Ajustes",       icon: Settings,        ownerOnly: false },
 ];
 
 interface SidebarProps {
   userEmail?: string | null;
+  userName?: string | null;
+  role?: "owner" | "employee";
 }
 
-export function Sidebar({ userEmail }: SidebarProps) {
+export function Sidebar({ userEmail, userName, role = "owner" }: SidebarProps) {
   const pathname = usePathname();
+
+  const nav = ALL_NAV.filter((item) => role === "owner" || !item.ownerOnly);
 
   function isActive(href: string) {
     if (href === "/") return pathname === "/";
     return pathname.startsWith(href);
   }
 
-  const initials = userEmail
-    ? userEmail.slice(0, 2).toUpperCase()
-    : "SP";
+  const initials = (userName ?? userEmail ?? "SP").slice(0, 2).toUpperCase();
+  const displayName = userName ?? userEmail ?? "Usuario";
 
   return (
     <aside className="flex flex-col w-52 shrink-0 h-full glass-sidebar">
@@ -66,12 +69,11 @@ export function Sidebar({ userEmail }: SidebarProps) {
         </div>
       </div>
 
-      {/* Divider */}
       <div className="mx-3 h-px bg-white/[0.06]" />
 
       {/* Nav */}
       <nav className="flex-1 px-2 py-3 space-y-0.5 overflow-y-auto">
-        {NAV.map(({ href, label, icon: Icon }) => {
+        {nav.map(({ href, label, icon: Icon }) => {
           const active = isActive(href);
           return (
             <Link
@@ -94,18 +96,22 @@ export function Sidebar({ userEmail }: SidebarProps) {
         })}
       </nav>
 
-      {/* Divider */}
       <div className="mx-3 h-px bg-white/[0.06]" />
 
-      {/* Footer — user */}
+      {/* Footer */}
       <div className="px-3 py-3">
         <div className="flex items-center gap-2.5">
           <div className="size-7 rounded-full bg-gradient-to-br from-violet-500/40 to-violet-800/40 border border-violet-500/30 flex items-center justify-center shrink-0">
             <span className="text-[9px] font-semibold text-violet-300">{initials}</span>
           </div>
           <div className="flex-1 min-w-0">
-            <p className="text-[10px] font-medium text-foreground truncate">Gino Patti</p>
-            <p className="text-[9px] text-muted-foreground truncate">{userEmail ?? ""}</p>
+            <p className="text-[10px] font-medium text-foreground truncate">{displayName}</p>
+            {role === "employee" && (
+              <p className="text-[9px] text-violet-400/70 truncate">Empleado</p>
+            )}
+            {role === "owner" && (
+              <p className="text-[9px] text-muted-foreground truncate">{userEmail ?? ""}</p>
+            )}
           </div>
           <button
             onClick={() => signOut({ callbackUrl: "/login" })}

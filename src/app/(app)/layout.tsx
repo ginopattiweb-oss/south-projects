@@ -9,11 +9,13 @@ export default async function AppLayout({ children }: { children: React.ReactNod
 
   return (
     <div className="flex h-screen overflow-hidden bg-background relative">
-      {/* Background gradient orbs */}
       <div className="orb-purple" />
       <div className="orb-cyan" />
-
-      <Sidebar userEmail={session.user?.email} />
+      <Sidebar
+        userEmail={session.user?.email}
+        userName={session.user?.name}
+        role={session.user?.role ?? "employee"}
+      />
       <main className="flex-1 overflow-y-auto min-w-0 relative z-10">
         {children}
       </main>
