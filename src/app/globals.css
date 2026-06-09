@@ -41,90 +41,76 @@
   --font-mono: var(--font-geist-mono);
 }
 
-/* ─── SOUTH PROJECTS — Brand System ──────────────────────────────────────── */
+/* ─── SOUTH PROJECTS — Glass Dark System ──────────────────────────────────── */
 
 :root {
   color-scheme: light;
 
-  --background:      #FAFAFA;
-  --foreground:      #0A0A0A;
-
+  --background:      #F8F8FC;
+  --foreground:      #0A0A14;
   --card:            #FFFFFF;
-  --card-elevated:   #F4F4F4;
-  --card-foreground: #0A0A0A;
-
+  --card-elevated:   #F0F0F8;
+  --card-foreground: #0A0A14;
   --popover:         #FFFFFF;
-  --popover-foreground: #0A0A0A;
-
-  --primary:         #0070F3;
+  --popover-foreground: #0A0A14;
+  --primary:         #7C3AED;
   --primary-foreground: #FFFFFF;
-
-  --secondary:       #F4F4F4;
-  --secondary-foreground: #0A0A0A;
-
-  --muted:           #F4F4F4;
-  --muted-foreground: #717171;
-
-  --accent:          #0070F3;
+  --secondary:       #F0F0F8;
+  --secondary-foreground: #0A0A14;
+  --muted:           #F0F0F8;
+  --muted-foreground: #6B7280;
+  --accent:          #7C3AED;
   --accent-foreground: #FFFFFF;
-  --accent-hover:    #0060D9;
-
-  --destructive:     #EF4444;
-
-  --border:          #E5E5E5;
+  --accent-hover:    #6D28D9;
+  --destructive:     #F43F5E;
+  --border:          #E4E4F0;
   --input:           #FFFFFF;
-  --ring:            #0070F3;
+  --ring:            #7C3AED;
+  --radius:          0.625rem;
 
-  --radius:          0.5rem;
-
-  --sidebar:         #F4F4F4;
-  --sidebar-foreground: #0A0A0A;
-  --sidebar-primary: #0070F3;
+  --sidebar:         #F0F0F8;
+  --sidebar-foreground: #0A0A14;
+  --sidebar-primary: #7C3AED;
   --sidebar-primary-foreground: #FFFFFF;
-  --sidebar-accent:  #E9E9E9;
-  --sidebar-accent-foreground: #0A0A0A;
-  --sidebar-border:  #E5E5E5;
-  --sidebar-ring:    #0070F3;
-
-  /* Chart palette */
-  --chart-1: #0070F3;
-  --chart-2: #3385F5;
-  --chart-3: #6AABFF;
-  --chart-4: #9FC8FF;
-  --chart-5: #C8DFFF;
+  --sidebar-accent:  #E4E4F0;
+  --sidebar-accent-foreground: #0A0A14;
+  --sidebar-border:  #E4E4F0;
+  --sidebar-ring:    #7C3AED;
 }
 
 .dark {
   color-scheme: dark;
 
-  --background:      #0A0A0A;
-  --foreground:      #F9F9F9;
-  --card:            #121212;
-  --card-elevated:   #1A1A1A;
-  --card-foreground: #F9F9F9;
-  --popover:         #1A1A1A;
-  --popover-foreground: #F9F9F9;
-  --primary:         #0070F3;
-  --primary-foreground: #F9F9F9;
-  --secondary:       #1A1A1A;
-  --secondary-foreground: #F9F9F9;
-  --muted:           #1A1A1A;
-  --muted-foreground: #9F9F9F;
-  --accent:          #0070F3;
-  --accent-foreground: #F9F9F9;
-  --accent-hover:    #3385F5;
-  --destructive:     #EF4444;
-  --border:          #262626;
-  --input:           #121212;
-  --ring:            #0070F3;
-  --sidebar:         #0A0A0A;
-  --sidebar-foreground: #F9F9F9;
-  --sidebar-primary: #0070F3;
-  --sidebar-primary-foreground: #F9F9F9;
-  --sidebar-accent:  #1A1A1A;
-  --sidebar-accent-foreground: #F9F9F9;
-  --sidebar-border:  #262626;
-  --sidebar-ring:    #0070F3;
+  --background:      #000000;
+  --foreground:      #F1F0FF;
+  --card:            #0D0D14;
+  --card-elevated:   #15151E;
+  --card-foreground: #F1F0FF;
+  --popover:         #15151E;
+  --popover-foreground: #F1F0FF;
+  --primary:         #8B5CF6;
+  --primary-foreground: #FFFFFF;
+  --secondary:       #15151E;
+  --secondary-foreground: #F1F0FF;
+  --muted:           #15151E;
+  --muted-foreground: #6B7280;
+  --accent:          #8B5CF6;
+  --accent-foreground: #FFFFFF;
+  --accent-hover:    #7C3AED;
+  --destructive:     #F43F5E;
+  --border:          #1E1E2E;
+  --input:           #0D0D14;
+  --ring:            #8B5CF6;
+  --radius:          0.625rem;
+
+  --sidebar:         #000000;
+  --sidebar-foreground: #F1F0FF;
+  --sidebar-primary: #8B5CF6;
+  --sidebar-primary-foreground: #FFFFFF;
+  --sidebar-accent:  #15151E;
+  --sidebar-accent-foreground: #F1F0FF;
+  --sidebar-border:  #1E1E2E;
+  --sidebar-ring:    #8B5CF6;
 }
 
 @layer base {
@@ -138,14 +124,82 @@
   html {
     @apply font-sans;
   }
-  /* Scrollbar */
-  ::-webkit-scrollbar { width: 6px; height: 6px; }
-  ::-webkit-scrollbar-track { background: var(--background); }
-  ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
-  ::-webkit-scrollbar-thumb:hover { background: var(--muted-foreground); }
+  ::-webkit-scrollbar { width: 4px; height: 4px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb { background: rgba(139, 92, 246, 0.25); border-radius: 4px; }
+  ::-webkit-scrollbar-thumb:hover { background: rgba(139, 92, 246, 0.45); }
 }
 
 @layer utilities {
+  /* Glass morphism */
+  .glass {
+    background: rgba(255, 255, 255, 0.04);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+  }
+  .glass-sm {
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+  }
+  .glass-sidebar {
+    background: rgba(5, 5, 10, 0.85);
+    backdrop-filter: blur(32px);
+    -webkit-backdrop-filter: blur(32px);
+    border-right: 1px solid rgba(255, 255, 255, 0.06);
+  }
+  /* Glows */
+  .glow-violet {
+    box-shadow: 0 0 24px rgba(139, 92, 246, 0.35);
+  }
+  .glow-sm {
+    box-shadow: 0 0 12px rgba(139, 92, 246, 0.2);
+  }
+  .glow-cyan {
+    box-shadow: 0 0 16px rgba(34, 211, 238, 0.25);
+  }
+  .glow-emerald {
+    box-shadow: 0 0 16px rgba(16, 185, 129, 0.25);
+  }
+  /* Text gradient */
+  .text-gradient-violet {
+    background: linear-gradient(135deg, #8B5CF6, #C084FC);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .text-gradient-cyan {
+    background: linear-gradient(135deg, #22D3EE, #67E8F9);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  /* Background orbs */
+  .orb-purple {
+    position: fixed;
+    top: -300px;
+    left: -200px;
+    width: 700px;
+    height: 700px;
+    background: radial-gradient(circle, rgba(139, 92, 246, 0.12) 0%, transparent 70%);
+    pointer-events: none;
+    z-index: 0;
+    border-radius: 50%;
+  }
+  .orb-cyan {
+    position: fixed;
+    bottom: -300px;
+    right: -200px;
+    width: 700px;
+    height: 700px;
+    background: radial-gradient(circle, rgba(34, 211, 238, 0.07) 0%, transparent 70%);
+    pointer-events: none;
+    z-index: 0;
+    border-radius: 50%;
+  }
+
   .card-elevated { background-color: var(--card-elevated); }
   .text-accent { color: var(--accent); }
   .bg-accent { background-color: var(--accent); }

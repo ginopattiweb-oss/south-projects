@@ -29,65 +29,74 @@ export default function LoginPage() {
     if (result?.ok) {
       router.push("/dashboard");
     } else {
-      setError("Acceso denegado. Solo el email autorizado puede ingresar.");
+      setError("Acceso denegado. Credenciales incorrectas.");
     }
 
     setLoading(false);
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-background">
-      <div className="w-full max-w-sm space-y-8 px-4">
-        {/* Logo */}
-        <div className="space-y-1">
-          <h1 className="text-lg font-semibold tracking-tight text-foreground">
-            SOUTH PROJECTS
-          </h1>
-          <p className="text-xs text-muted-foreground">Sistema Operativo de Negocio</p>
+    <div className="min-h-screen flex items-center justify-center bg-background relative overflow-hidden">
+      <div className="orb-purple" />
+      <div className="orb-cyan" />
+
+      <div className="relative z-10 w-full max-w-sm px-4">
+        <div className="glass rounded-2xl p-8 space-y-7">
+          <div className="space-y-4">
+            <div className="size-10 rounded-xl bg-gradient-to-br from-violet-500 to-violet-700 flex items-center justify-center glow-violet">
+              <span className="text-sm font-bold text-white">SP</span>
+            </div>
+            <div>
+              <h1 className="text-base font-semibold text-foreground tracking-tight">
+                SOUTH PROJECTS
+              </h1>
+              <p className="text-xs text-muted-foreground mt-0.5">Sistema Operativo de Negocio</p>
+            </div>
+          </div>
+
+          <form onSubmit={handleSubmit} className="space-y-4">
+            <div className="space-y-1.5">
+              <label className="text-[11px] font-medium text-muted-foreground uppercase tracking-widest">
+                Email
+              </label>
+              <Input
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="you@domain.com"
+                required
+                autoFocus
+                className="bg-white/[0.05] border-white/[0.1] text-foreground placeholder:text-muted-foreground/50"
+              />
+            </div>
+
+            <div className="space-y-1.5">
+              <label className="text-[11px] font-medium text-muted-foreground uppercase tracking-widest">
+                Contraseña
+              </label>
+              <Input
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                placeholder="••••••••"
+                required
+                className="bg-white/[0.05] border-white/[0.1] text-foreground placeholder:text-muted-foreground/50"
+              />
+            </div>
+
+            {error && (
+              <p className="text-xs text-rose-400">{error}</p>
+            )}
+
+            <Button
+              type="submit"
+              disabled={loading}
+              className="w-full bg-violet-600 hover:bg-violet-500 text-white transition-all glow-violet"
+            >
+              {loading ? <Loader2 className="size-4 animate-spin" /> : "Ingresar"}
+            </Button>
+          </form>
         </div>
-
-        <form onSubmit={handleSubmit} className="space-y-4">
-          <div className="space-y-1.5">
-            <label className="text-xs font-medium text-muted-foreground uppercase tracking-wide">
-              Email
-            </label>
-            <Input
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              placeholder="you@domain.com"
-              required
-              autoFocus
-              className="bg-card"
-            />
-          </div>
-
-          <div className="space-y-1.5">
-            <label className="text-xs font-medium text-muted-foreground uppercase tracking-wide">
-              Contraseña
-            </label>
-            <Input
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              placeholder="••••••••"
-              required
-              className="bg-card"
-            />
-          </div>
-
-          {error && (
-            <p className="text-xs text-red-400">{error}</p>
-          )}
-
-          <Button
-            type="submit"
-            disabled={loading}
-            className="w-full bg-[#0070F3] hover:bg-[#3385F5] text-white"
-          >
-            {loading ? <Loader2 className="size-4 animate-spin" /> : "Ingresar"}
-          </Button>
-        </form>
       </div>
     </div>
   );
