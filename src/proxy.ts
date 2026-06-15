@@ -35,8 +35,8 @@ export default async function proxy(request: NextRequest) {
     return NextResponse.next();
   }
 
-  // Non-clients blocked from /portal
-  if (pathname.startsWith("/portal")) {
+  // Non-clients blocked from /portal (but not /portal-access)
+  if (pathname === "/portal" || pathname.startsWith("/portal/")) {
     return NextResponse.redirect(new URL("/dashboard", request.url));
   }
 
