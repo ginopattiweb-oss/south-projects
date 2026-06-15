@@ -17,6 +17,7 @@ import {
   BarChart2,
   KeyRound,
   FileSignature,
+  Globe,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -30,9 +31,10 @@ const ALL_NAV = [
   { href: "/quotes",        label: "Cotizaciones",  icon: FileSignature,   ownerOnly: true  },
   { href: "/subscriptions", label: "Suscripciones", icon: RefreshCw,       ownerOnly: true  },
   { href: "/expenses",      label: "Gastos",        icon: Receipt,         ownerOnly: true  },
-  { href: "/vault",         label: "Bóveda",        icon: KeyRound,        ownerOnly: true  },
-  { href: "/wiki",          label: "Wiki",          icon: BookOpen,        ownerOnly: false },
-  { href: "/settings",      label: "Ajustes",       icon: Settings,        ownerOnly: false },
+  { href: "/vault",          label: "Bóveda",         icon: KeyRound,        ownerOnly: true  },
+  { href: "/portal-access", label: "Portal Clientes",icon: Globe,           ownerOnly: true  },
+  { href: "/wiki",          label: "Wiki",           icon: BookOpen,        ownerOnly: false },
+  { href: "/settings",      label: "Ajustes",        icon: Settings,        ownerOnly: false },
 ];
 
 interface SidebarProps {

@@ -114,6 +114,7 @@ model Client {
   projects     Project[]
   invoices     Invoice[]
   accesses     ClientAccess[]
+  clientUsers  ClientUser[]
   createdAt    DateTime       @default(now())
   updatedAt    DateTime       @updatedAt
 }
@@ -227,6 +228,16 @@ model Quote {
   data       Json
   createdAt  DateTime @default(now())
   updatedAt  DateTime @updatedAt
+}
+
+model ClientUser {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  password  String
+  clientId  String
+  client    Client   @relation(fields: [clientId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
 model WikiPage {

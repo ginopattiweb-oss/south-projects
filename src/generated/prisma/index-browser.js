@@ -270,6 +270,15 @@ exports.Prisma.QuoteScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
+exports.Prisma.ClientUserScalarFieldEnum = {
+  id: 'id',
+  email: 'email',
+  password: 'password',
+  clientId: 'clientId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
 exports.Prisma.WikiPageScalarFieldEnum = {
   id: 'id',
   title: 'title',
@@ -367,6 +376,7 @@ exports.Prisma.ModelName = {
   Expense: 'Expense',
   AgencyVault: 'AgencyVault',
   Quote: 'Quote',
+  ClientUser: 'ClientUser',
   WikiPage: 'WikiPage'
 };
 
